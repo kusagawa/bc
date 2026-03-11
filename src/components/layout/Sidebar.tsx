@@ -9,6 +9,8 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
+  Shirt,
+  Boxes,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -19,6 +21,11 @@ const navItems = [
   { to: '/floorplan', icon: Map, label: '売場レイアウト' },
   { to: '/analysis', icon: BarChart3, label: '売上分析' },
   { to: '/stores', icon: Store, label: '店舗管理' },
+];
+
+const uniqloNavItems = [
+  { to: '/uniqlo-floorplan', icon: Shirt, label: 'UQ売場計画' },
+  { to: '/uniqlo-inventory', icon: Boxes, label: 'UQ在庫計画' },
 ];
 
 export default function Sidebar() {
@@ -58,6 +65,30 @@ export default function Sidebar() {
               `flex items-center gap-3 px-4 py-2.5 mx-2 my-0.5 rounded-md text-sm transition-colors ${
                 isActive
                   ? 'bg-blue-600 text-white'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              }`
+            }
+          >
+            <item.icon size={18} />
+            {!collapsed && <span>{item.label}</span>}
+          </NavLink>
+        ))}
+
+        {/* UNIQLO Section */}
+        <div className="mx-2 my-2 border-t border-gray-700" />
+        {!collapsed && (
+          <div className="px-4 py-1">
+            <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">UNIQLO</span>
+          </div>
+        )}
+        {uniqloNavItems.map(item => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-2.5 mx-2 my-0.5 rounded-md text-sm transition-colors ${
+                isActive
+                  ? 'bg-red-600 text-white'
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`
             }
